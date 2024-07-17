@@ -92,7 +92,7 @@ app.put('/update', (req,res)=>{
     })
 })
 
-app.get('/',(re,res)=>{
+app.get('/ass',(re,res)=>{
     return res.json("From backend");
 })
 
