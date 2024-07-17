@@ -27,7 +27,7 @@ const pool = mysql.createPool({
 
  pool.getConnection((err, con) => {
      if(err) console.log(err)
-    
+     console.log(con);
      console.log("Connected successfully")
     
  })
@@ -42,7 +42,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 
     app.get('/', (re,res)=>{
         const sql = "SELECT * FROM usuarios";
-         mysql.query(sql, (err,data)=>{
+         pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
             
             return res.json(data);
