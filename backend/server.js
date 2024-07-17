@@ -1,11 +1,13 @@
+
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 const bodyparser = require('body-parser');
 const port = 3306;
 const app = express();
-
+const http = 'http';
 app.use(cors());
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
@@ -16,28 +18,32 @@ const pool = mysql.createPool({
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
     timeout: 60 * 60 * 1000,
-    host: "bgvusz4txszizi31znqq-mysql.services.clever-cloud.com", 
-    user: "ulu5sqnx0lz5qslp", 
-    password: "ijYEScR0tN3qp79mTItJ",
-    database: "bgvusz4txszizi31znqq",
+    host: process.env.MYSQL_ADDON_HOST, 
+    database: process.env.MYSQL_ADDON_DB,
+    user: process.env.MYSQL_ADDON_USER, 
+    password: process.env.MYSQL_ADDON_PASSWORD,
     waitForConnections: true,
-});
-
-pool.getConnection((err, con) => {
-    if(err) console.log(err)
-    console.log("Connected successfully")
 })
 
+ pool.getConnection((err, con) => {
+     if(err) console.log(err)
+       
+     console.log("Connected successfully")
+    
+ })
 
 
 
-app.get('/', (re,res)=>{
-    const sql = "SELECT * FROM usuarios";
-     pool.query(sql, (err,data)=>{
-        if(err) return res.json(err);
-         return res.json(data);
+
+    app.get('/', (re,res)=>{
+        const sql = "SELECT * FROM usuarios";
+         pool.query(sql, (err,data)=>{
+            if(err) return res.json(err);
+         
+             return res.json(data);
+        })
     })
-})
+
 app.post('/create',(req,res)=>{
     
     
