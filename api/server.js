@@ -44,7 +44,7 @@ app.use(bodyparser.urlencoded({extended: true}));
         const sql = "SELECT * FROM usuarios";
          pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
-            
+            console.log(data);
             return res.json(data);
         })
         console.log('buscando..');
