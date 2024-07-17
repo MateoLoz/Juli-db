@@ -28,7 +28,7 @@ const pool = mysql.createPool({
 
  pool.getConnection((err, con) => {
      if(err) console.log(err)
-       
+    
      console.log("Connected successfully")
     
  })
@@ -40,7 +40,7 @@ const pool = mysql.createPool({
         const sql = "SELECT * FROM usuarios";
          pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
-         
+           
              return res.json(data);
         })
     })
