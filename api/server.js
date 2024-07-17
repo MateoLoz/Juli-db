@@ -44,6 +44,7 @@ app.use(bodyparser.urlencoded({extended: true}));
         const sql = "SELECT * FROM usuarios";
          pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
+            console.log(data);
             return res.json(data);
         })
         console.log('buscando..');
@@ -67,6 +68,7 @@ app.post('/create',(req,res)=>{
     console.log(values)
     pool.query(sql, [values], (err,data)=>{
         if(err) return res.json(err);
+        console.log(data);
         return res.json("Creando..");
     })
     console.log('creando..');
@@ -89,6 +91,7 @@ app.put('/update', (req,res)=>{
 
     pool.query(sql,[...values,id ],(err,data)=>{
         if(err) return res.json(err);
+        console.log(data);
         return res.json('Datos modificados!');
     })
     console.log('actualizando..');
