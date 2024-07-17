@@ -39,7 +39,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 
 
 
-    app.get('/usu', (re,res)=>{
+    app.get('/', (re,res)=>{
         const sql = "SELECT * FROM usuarios";
          pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
