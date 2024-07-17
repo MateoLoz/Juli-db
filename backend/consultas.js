@@ -1,5 +1,6 @@
 import {pool} from './database'
 
+pool();
 
 app.get('/', (re,res)=>{
     const sql = "SELECT * FROM usuarios";
