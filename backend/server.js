@@ -18,13 +18,13 @@ app.use(bodyparser.urlencoded({extended: true}));
       connectionLimit: 10,
       queueLimit: 0
   })
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+// const db = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_DATABASE,
    
-})
+// })
 
  pool.getConnection((err,con)=>{
  if(err) console.log(err);
@@ -55,7 +55,7 @@ app.post('/create',(req,res)=>{
       req.body.salida,
     ];
     console.log(values)
-    db.query(sql, [values], (err,data)=>{
+    pool.query(sql, [values], (err,data)=>{
         if(err) return res.json(err);
         return res.json("Creando..");
     })
@@ -77,7 +77,7 @@ app.put('/update', (req,res)=>{
 
 
 
-    db.query(sql,[...values,id ],(err,data)=>{
+    pool.query(sql,[...values,id ],(err,data)=>{
         if(err) return res.json(err);
         return res.json('Datos modificados!');
     })
@@ -90,7 +90,7 @@ app.get('/',(re,res)=>{
 app.delete('/', (req,res)=>{
 const sql = "DELETE FROM `usuarios` WHERE `usuarios`.`id` = ?"
 
-db.query(sql,[req.body.id],(err,data)=>{
+pool.query(sql,[req.body.id],(err,data)=>{
     if(err) return res.json(err);
     return res.json("eliminando..");
 })
@@ -103,7 +103,7 @@ const values = [
     req.body.serch,
 ]
 console.log(values);
-db.query(sql,[...values],(err,data)=>{
+pool.query(sql,[...values],(err,data)=>{
     if(err) return res.json(err);
     return res.json(data);
 })
@@ -113,7 +113,7 @@ app.get('/Pago',(req,res)=>{
 
     const sql = "SELECT * FROM `usuarios` WHERE usuarios.stado = 'Pago';"
 
-    db.query(sql,(err,data)=>{
+    pool.query(sql,(err,data)=>{
         if(err) return res.json(err);
         return res.json(data);
     })
@@ -123,7 +123,7 @@ app.get('/Pago',(req,res)=>{
 
         const sql = "SELECT * FROM `usuarios` WHERE usuarios.stado = 'Inpago';"
     
-        db.query(sql,(err,data)=>{
+        pool.query(sql,(err,data)=>{
             if(err) return res.json(err);
             return res.json(data);
 
@@ -134,7 +134,7 @@ app.get('/Pago',(req,res)=>{
 
             const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'bono mensual medium';"
         
-            db.query(sql,(err,data)=>{
+            pool.query(sql,(err,data)=>{
                 if(err) return res.json(err);
                 return res.json(data);
                 
@@ -145,7 +145,7 @@ app.get('/Pago',(req,res)=>{
 
                 const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'bono mensual basico';"
             
-                db.query(sql,(err,data)=>{
+                pool.query(sql,(err,data)=>{
                     if(err) return res.json(err);
                     return res.json(data);
                     
@@ -156,7 +156,7 @@ app.get('/Pago',(req,res)=>{
 
                     const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'bono bicho feo';"
                 
-                    db.query(sql,(err,data)=>{
+                    pool.query(sql,(err,data)=>{
                         if(err) return res.json(err);
                         return res.json(data);
                         
@@ -167,7 +167,7 @@ app.get('/Pago',(req,res)=>{
 
                         const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'taller intensivo';"
                     
-                        db.query(sql,(err,data)=>{
+                        pool.query(sql,(err,data)=>{
                             if(err) return res.json(err);
                             return res.json(data);
                             
@@ -178,7 +178,7 @@ app.get('/Pago',(req,res)=>{
 
                             const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'bono semanal';"
                         
-                            db.query(sql,(err,data)=>{
+                            pool.query(sql,(err,data)=>{
                                 if(err) return res.json(err);
                                 return res.json(data);
                                 
@@ -189,7 +189,7 @@ app.get('/Pago',(req,res)=>{
 
                                 const sql = "SELECT * FROM `usuarios` WHERE usuarios.membresia = 'bono diario';"
                             
-                                db.query(sql,(err,data)=>{
+                                pool.query(sql,(err,data)=>{
                                     if(err) return res.json(err);
                                     return res.json(data);
                                     
@@ -204,4 +204,4 @@ app.get('/Pago',(req,res)=>{
 app.listen(port,()=> console.log('server is running! '));
 
 
- module.exports = pool.promise();
+
