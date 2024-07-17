@@ -1,5 +1,5 @@
+const express = require('express')
 
-const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -7,10 +7,8 @@ dotenv.config();
 const bodyparser = require('body-parser');
 const port = 3306;
 const app = express();
-const http = 'http';
-app.use(cors());
-app.use(express.json());
-app.use(bodyparser.urlencoded({extended: true}));
+
+
 
  
 const pool = mysql.createPool({
@@ -33,6 +31,11 @@ const pool = mysql.createPool({
     
  })
 
+
+ 
+app.use(cors());
+app.use(express.json());
+app.use(bodyparser.urlencoded({extended: true}));
 
 
 
