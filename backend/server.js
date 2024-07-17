@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyparser = require('body-parser');
 const port = 3306;
 const app = express();
+const url = process.env.DB_URL;
 app.use(cors());
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
@@ -31,7 +32,7 @@ const db = mysql.createConnection({
 // })
 
 
-app.get('/', (re,res)=>{
+app.get(`${url}/`, (re,res)=>{
     const sql = "SELECT * FROM usuarios";
     db.query(sql, (err,data)=>{
         if(err) return res.json(err);
