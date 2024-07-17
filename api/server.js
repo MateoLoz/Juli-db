@@ -22,6 +22,7 @@ const pool = mysql.createPool({
     url:process.env.MYSQL_ADDON_URI,
     password: process.env.MYSQL_ADDON_PASSWORD,
     waitForConnections: true,
+    max_user_connections: 2,
 })
 
  pool.getConnection((err, con) => {
