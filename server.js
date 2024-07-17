@@ -8,7 +8,15 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
 
-
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+})
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -16,6 +24,10 @@ const db = mysql.createConnection({
     database: process.env.DB_DATABASE,
 })
 
+pool.getConnection((err,con)=>{
+if(err) console.log(err);
+console.log('conexion funcionando!');
+})
 
 
 app.get('/', (re,res)=>{
@@ -190,3 +202,4 @@ app.get('/Pago',(req,res)=>{
 app.listen(port,()=> console.log('server is running! '));
 
 
+module.exports = pool.promise();
