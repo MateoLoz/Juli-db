@@ -44,9 +44,9 @@ app.use(bodyparser.urlencoded({extended: true}));
         const sql = "SELECT * FROM usuarios";
          pool.query(sql, (err,data)=>{
             if(err) return res.json(err);
-           
-             return res.json(data);
+            return res.json(data);
         })
+        console.log('buscando..');
     })
 
 app.post('/create',(req,res)=>{
@@ -69,7 +69,7 @@ app.post('/create',(req,res)=>{
         if(err) return res.json(err);
         return res.json("Creando..");
     })
-   
+    console.log('creando..');
 })
 app.put('/update', (req,res)=>{
     const sql = "UPDATE `usuarios` SET `nombre` = ?, `apellido` = ?, `email` = ?, `stado` = ?, `vencimiento` = ? , `horas` = ? WHERE `usuarios`.`id` = ?;";
@@ -91,6 +91,7 @@ app.put('/update', (req,res)=>{
         if(err) return res.json(err);
         return res.json('Datos modificados!');
     })
+    console.log('actualizando..');
 })
 
 app.get('/ass',(re,res)=>{
@@ -104,6 +105,7 @@ pool.query(sql,[req.body.id],(err,data)=>{
     if(err) return res.json(err);
     return res.json("eliminando..");
 })
+console.log('eliminando..');
 })
 
 app.put('/serch',(req,res)=>{
