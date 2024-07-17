@@ -21,6 +21,7 @@ const pool = mysql.createPool({
     host: process.env.MYSQL_ADDON_HOST, 
     database: process.env.MYSQL_ADDON_DB,
     user: process.env.MYSQL_ADDON_USER, 
+    url:process.env.MYSQL_ADDON_URI,
     password: process.env.MYSQL_ADDON_PASSWORD,
     waitForConnections: true,
 })
