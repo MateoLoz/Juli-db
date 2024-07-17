@@ -2,7 +2,7 @@
    
      "rewrites":[
         {
-            "source":"https://julieta-seven.vercel.app/",
+            "source": "/(.*)",
             "destination":"api/server.js"
         }
     ]
